@@ -2,28 +2,43 @@ name: CI
 
 on:
   pull_request:
-    branches:
-      - "main"
+    branches: ["main"]
   push:
-    branches:
-      - "main"
+    branches: ["main"]
 
 jobs:
   validate:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Verify repo baseline files
+      - name: Verify required files
         run: |
           test -f README.md
           test -f .gitignore
+          test -f index.html
+          test -f assets/css/styles.css
 
-      - name: Verify index.html exists (optional until ALBUM-2)
+      - name: Block Bootstrap example local asset paths
         run: |
-          if [ -f index.html ]; then
-            echo "index.html found ✅"
-          else
-            echo "index.html not present yet (expected until ALBUM-2) ✅"
+          if grep -R "../assets/" -n index.html; then
+            echo "Found ../assets/ reference (Bootstrap example path). Remove it."
+            exit 1
           fi
+
+      - name: Verify Bootstrap CDN links exist
+        run: |
+          grep -q "cdn.jsdelivr.net/npm/bootstrap" index.html
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install deps
+        run: npm ci
+
+      - name: Run CI checks (Prettier + HTMLHint)
+        run: npm run ci

@@ -1,0 +1,19 @@
+{
+  "name": "album-site",
+  "version": "1.0.0",
+  "description": "Bootstrap 5.3 Album example site.",
+  "main": "index.js",
+  "scripts": {
+    "format": "prettier . --write",
+    "format:check": "prettier . --check",
+    "html:lint": "htmlhint \"**/*.html\"",
+    "ci": "npm run format:check && npm run html:lint"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "htmlhint": "^1.9.1",
+    "prettier": "^3.8.1"
+  }
+}
