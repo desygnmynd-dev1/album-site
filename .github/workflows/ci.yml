@@ -1,0 +1,29 @@
+name: CI
+
+on:
+  pull_request:
+    branches:
+      - "main"
+  push:
+    branches:
+      - "main"
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Verify repo baseline files
+        run: |
+          test -f README.md
+          test -f .gitignore
+
+      - name: Verify index.html exists (optional until ALBUM-2)
+        run: |
+          if [ -f index.html ]; then
+            echo "index.html found ✅"
+          else
+            echo "index.html not present yet (expected until ALBUM-2) ✅"
+          fi
