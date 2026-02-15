@@ -1,0 +1,24 @@
+/* =============================
+   Album Site Custom Styles
+   Loads AFTER Bootstrap
+   ============================= */
+
+/* Global polish */
+:root {
+  --album-accent: #0d6efd; /* Bootstrap primary default */
+}
+
+/* Slightly improve card interaction without changing layout */
+.card {
+  transition: transform 120ms ease, box-shadow 120ms ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+}
+
+/* Better focus visibility (accessibility) */
+:focus-visible {
+  outline: 2px solid var(--album-accent);
+  outline-offset: 2px;
+}
