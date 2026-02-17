@@ -92,6 +92,7 @@
     </style>
   </head>
   <body>
+    <a class="visually-hidden-focusable" href="#main-content">Skip to main content</a>
     <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
       <symbol id="check2" viewBox="0 0 16 16">
         <path
@@ -122,8 +123,10 @@
         id="bd-theme"
         type="button"
         aria-expanded="false"
-        data-bs-toggle="dropdown"
-        aria-label="Toggle theme (auto)"
+        data-bs-toggle="collapse"
+        aria-label="Toggle navigation"
+        data-bs-target="#navbarHeader"
+        aria-controls="navbarHeader"
       >
         <svg class="bi my-1 theme-icon-active" width="1em" height="1em">
           <use href="#circle-half"></use>
